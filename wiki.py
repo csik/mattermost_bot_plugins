@@ -43,13 +43,3 @@ def wiki(message, searchterm):
             break
     
     message.reply(u"{0}\n{1}".format(p, link).encode('ascii', 'ignore'))
-
-def on_message(msg, server):
-    text = msg.get("text", "")
-    match = re.findall(r"!wiki (.*)", text)
-    if not match:
-        return
-
-    searchterm = match[0]
-    return wiki(searchterm.encode("utf8"))
-
