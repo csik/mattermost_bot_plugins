@@ -1,7 +1,7 @@
 """!wiki <topic> returns a wiki link for <topic>"""
 
 from mattermost_bot.bot import listen_to
-
+import logging
 import feedparser
 
 HELPTEXT = """
@@ -29,11 +29,12 @@ def feed_url(name):
 @listen_to('newz (.*)')
 def newz_listen(message, searchterm):
     """Give news headlines from a variety of sources"""
-    feed = feedparser.parse('')
+    feed = feedparser.parse(feed_url(searchterm))
     return_val = ""
     for entry in feed.entries:
-        return_val += ("[{}]({})i\n".format(entry.title, entry.link))
-
-    message.reply(u"{}".format(return_val.encode('ascii', 'ignore')))
+        return_val += str("[{0}]({1})\n".format(entry.title, entry.link))
+    logging.info(return_val)
+    message.reply(return_val)
+    #message.reply("{}".format(str(return_val)))
 
     newz_listen.__doc__ = "Give news headlines from a variety of sources: newz nyt"
