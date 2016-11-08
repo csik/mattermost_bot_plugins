@@ -35,4 +35,4 @@ def image(message, searchterm):
     else:
         message.reply( "")
 
-
+image.__doc__ = "Get an image search: @mitibot image banana"

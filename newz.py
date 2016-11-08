@@ -27,7 +27,7 @@ def feed_url(name):
 
 
 @listen_to('newz (.*)')
-def newz_listen(message, searchterm):
+def newz(message, searchterm):
     """Give news headlines from a variety of sources"""
     if feed_url(searchterm) != HELPTEXT:	
         feed = feedparser.parse(feed_url(searchterm))
@@ -42,4 +42,4 @@ def newz_listen(message, searchterm):
     message.reply(return_val)
     #message.reply("{}".format(str(return_val)))
 
-    newz_listen.__doc__ = "Give news headlines from a variety of sources: newz nyt"
+newz.__doc__ = "Give news headlines from a variety of sources: newz nyt"

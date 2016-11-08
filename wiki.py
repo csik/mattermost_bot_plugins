@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 
 @respond_to('wiki (.*)')
 def wiki(message, searchterm):
-    """return the top wiki search result for the term"""
+    """Return the top wiki search result for the term: @mitibot wiki yo_mama"""
     searchterm = quote(searchterm)
 
     url = "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch={0}&format=json"
