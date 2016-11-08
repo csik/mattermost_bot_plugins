@@ -29,10 +29,15 @@ def feed_url(name):
 @listen_to('newz (.*)')
 def newz_listen(message, searchterm):
     """Give news headlines from a variety of sources"""
-    feed = feedparser.parse(feed_url(searchterm))
-    return_val = ""
-    for entry in feed.entries:
-        return_val += str("[{0}]({1})\n".format(entry.title, entry.link))
+    if feed_url(searchterm) != HELPTEXT:	
+        feed = feedparser.parse(feed_url(searchterm))
+        return_val = ""
+        for index,entry in enumerate(feed.entries):
+            return_val += str("[{0}]({1})\n".format(entry.title, entry.link))
+            if index >=20:
+                break
+    else:
+        return_val = HELPTEXT
     logging.info(return_val)
     message.reply(return_val)
     #message.reply("{}".format(str(return_val)))
